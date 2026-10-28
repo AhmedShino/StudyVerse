@@ -6,7 +6,8 @@ const defaults = {
   streak: { days: [], best: 0 },
   timer: { status: "idle", durationMs: 25 * 60 * 1000, remainingMs: 25 * 60 * 1000, endsAt: null, startedAt: null, subject: "رياضيات", breakEnabled: true, isBreak: false },
   rooms: [],
-  theme: "dark"
+  theme: "light",
+  designVersion: 2
 };
 function clone(value) { return JSON.parse(JSON.stringify(value)); }
 export function loadState() {
@@ -15,6 +16,8 @@ export function loadState() {
     if (!raw) return clone(defaults);
     const parsed = JSON.parse(raw);
     return { ...clone(defaults), ...parsed,
+      theme: parsed.designVersion === 2 ? (parsed.theme || "light") : "light",
+      designVersion: 2,
       profile: { ...defaults.profile, ...(parsed.profile || {}) },
       timer: { ...defaults.timer, ...(parsed.timer || {}) },
       streak: { ...defaults.streak, ...(parsed.streak || {}) },
