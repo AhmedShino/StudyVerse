@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="StudyVerse - ذاكر بتركيز، وتقدم مع مجتمعك">
+  <title>StudyVerse</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">S<span>V</span></div>
+        <div><strong>StudyVerse</strong><small>مساحتك للإنجاز</small></div>
+      </div>
+      <button class="icon-btn" id="themeToggle" aria-label="تغيير المظهر" title="تغيير المظهر">◐</button>
+    </header>
+
+    <main id="appMain">
+      <section class="view active" id="view-home">
+        <div class="welcome-row">
+          <div><p class="eyebrow">مساحة جديدة للتركيز</p><h1>أهلاً، <span id="userGreeting">يا بطل</span> 👋</h1><p class="muted">كل جلسة صغيرة بتقرّبك من هدفك.</p></div>
+          <div class="level-orb"><span id="levelValue">1</span><small>المستوى</small></div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-copy"><span class="pill pill-blue">هدف اليوم</span><h2><span id="todayMinutes">0</span> <small>دقيقة</small></h2><p class="muted">من <span id="goalMinutes">120</span> دقيقة مستهدفة</p>
+            <div class="progress-track"><div id="dailyProgress" class="progress-fill" style="width:0%"></div></div>
+            <div class="progress-caption"><span id="goalPercent">0%</span><span>كل دقيقة محسوبة</span></div>
+          </div>
+          <div class="hero-art" aria-hidden="true"><div class="planet">✦</div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div></div>
+        </div>
+
+        <button class="primary-btn start-home" id="startSessionBtn"><span class="play-icon">▶</span><span><strong>ابدأ جلسة مذاكرة</strong><small>ركّز على خطوة واحدة الآن</small></span><b>←</b></button>
+
+        <div class="section-heading"><div><p class="eyebrow">خطوتك التالية</p><h2>لوحة إنجازك</h2></div><span class="subtle-chip" id="streakBadge">🔥 0 يوم</span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-icon blue">◷</div><strong id="weekHours">0س</strong><span>هذا الأسبوع</span></article>
+          <article class="stat-card"><div class="stat-icon purple">✧</div><strong id="xpValue">0 XP</strong><span>نقاط الخبرة</span></article>
+          <article class="stat-card"><div class="stat-icon mint">✓</div><strong id="sessionCount">0</strong><span>جلسات مكتملة</span></article>
+        </div>
+
+        <div class="section-heading"><div><p class="eyebrow">ابدأ بخطوة</p><h2>تحدياتك</h2></div><button class="text-btn" data-nav="challenges">عرض الكل ←</button></div>
+        <div id="challengePreview" class="challenge-list"></div>
+
+        <div class="section-heading"><div><p class="eyebrow">ذاكروا معًا</p><h2>غرف الدراسة</h2></div><button class="text-btn" data-nav="rooms">استكشف ←</button></div>
+        <div class="room-teaser"><div class="room-avatar">◉</div><div class="room-teaser-copy"><strong>ركن التركيز</strong><span>أنشئ غرفة أو انضم لأصدقائك</span></div><button class="small-outline" data-nav="rooms">دخول</button></div>
+        <p class="footnote">تُحفظ جلساتك على هذا الجهاز. الميزات الاجتماعية تحتاج إعداد الخادم الموضح في دليل المشروع.</p>
+      </section>
+
+      <section class="view" id="view-timer">
+        <div class="screen-heading"><p class="eyebrow">جلسة هادئة، تركيز أعلى</p><h1>وقت التركيز</h1><p class="muted">اختار المادة والمدة، والباقي على المؤقت.</p></div>
+        <div class="timer-panel">
+          <div class="timer-status" id="timerStatus">جاهز لجلسة جديدة</div>
+          <div class="timer-ring" id="timerRing"><div class="timer-center"><strong id="timerDisplay">25:00</strong><span id="timerSubtext">دقيقة تركيز</span></div></div>
+          <div class="timer-controls"><button class="primary-btn" id="timerStartPause">ابدأ التركيز</button><button class="secondary-btn" id="timerReset">إعادة ضبط</button><button class="danger-text" id="timerFinish">إنهاء الجلسة</button></div>
+        </div>
+        <div class="form-card">
+          <label for="subjectSelect">المادة الدراسية</label>
+          <select id="subjectSelect"><option>رياضيات</option><option>فيزياء</option><option>كيمياء</option><option>عربي</option><option>إنجليزي</option><option>مذاكرة عامة</option></select>
+          <label for="durationSelect">مدة الجلسة</label>
+          <div class="duration-options" id="durationOptions">
+            <button data-minutes="15">15 د</button><button class="selected" data-minutes="25">25 د</button><button data-minutes="45">45 د</button><button data-minutes="60">60 د</button>
+          </div>
+          <label class="switch-row"><span><strong>استراحة بعد الجلسة</strong><small>5 دقائق لاستعادة النشاط</small></span><input type="checkbox" id="breakToggle" checked><i></i></label>
+        </div>
+        <div class="notice-card"><span>ⓘ</span><p>المؤقت يحسب الوقت من الطوابع الزمنية، لذلك يقدر يستعيد الوقت المتبقي بعد إغلاق التطبيق. إشعارات أندرويد تحتاج منح الإذن.</p></div>
+      </section>
+
+      <section class="view" id="view-challenges">
+        <div class="screen-heading"><p class="eyebrow">تقدمك على طريقتك</p><h1>التحديات</h1><p class="muted">التحديات تشجعك، مش تحاسبك على يوم صعب.</p></div>
+        <div class="segmented"><button class="selected" data-challenge-filter="all">الكل</button><button data-challenge-filter="daily">يومي</button><button data-challenge-filter="weekly">أسبوعي</button></div>
+        <div id="challengeList" class="challenge-list"></div>
+        <div class="notice-card"><span>✦</span><p>النقاط في النسخة المحلية تجريبية ومخصصة لجلسات هذا الجهاز. ترتيب حقيقي بين المستخدمين يتطلب خادمًا يتحقق من الجلسات.</p></div>
+      </section>
+
+      <section class="view" id="view-rooms">
+        <div class="screen-heading"><p class="eyebrow">التركيز أحلى مع ناس</p><h1>غرف الدراسة</h1><p class="muted">جلسات مشتركة بدون صوت أو فيديو في البداية.</p></div>
+        <div class="room-feature"><div class="room-feature-icon">⌘</div><h2>ذاكروا في نفس المساحة</h2><p>أنشئ غرفة لهدف واضح، وحدد مدة، وادعُ أصحابك. مزامنة الوقت الحقيقية تُفعّل بعد ربط Supabase.</p></div>
+        <div class="form-card">
+          <label for="roomName">اسم الغرفة</label><input id="roomName" type="text" maxlength="40" placeholder="مثلاً: مراجعة التفاضل">
+          <label for="roomGoal">هدف الجلسة</label><input id="roomGoal" type="text" maxlength="100" placeholder="حل 20 سؤالًا">
+          <label for="roomDuration">مدة الغرفة</label><select id="roomDuration"><option value="25">25 دقيقة</option><option value="45">45 دقيقة</option><option value="60">60 دقيقة</option><option value="90">90 دقيقة</option></select>
+          <button class="primary-btn full-width" id="createRoomBtn">إنشاء غرفة محلية</button>
+          <p class="field-note">الغرف المنشأة هنا محفوظة على جهازك فقط، ولا تظهر لأصدقاء آخرين قبل إعداد الخادم.</p>
+        </div>
+        <div class="section-heading"><div><p class="eyebrow">على هذا الجهاز</p><h2>غرفك</h2></div></div>
+        <div id="localRooms" class="room-list"></div>
+      </section>
+
+      <section class="view" id="view-profile">
+        <div class="screen-heading"><p class="eyebrow">رحلتك في StudyVerse</p><h1>ملفك الشخصي</h1></div>
+        <div class="profile-card"><div class="profile-avatar" id="profileInitial">S</div><div><h2 id="profileName">طالب StudyVerse</h2><p class="muted">حساب محلي على هذا الجهاز</p></div><span class="pill pill-blue" id="profileLevel">المستوى 1</span></div>
+        <div class="form-card"><label for="nameInput">اسم العرض</label><input id="nameInput" type="text" maxlength="30" placeholder="اكتب اسمك"><label for="goalInput">هدفك اليومي (بالدقائق)</label><input id="goalInput" type="number" min="15" max="720" step="15" value="120"><label for="languageSelect">اللغة</label><select id="languageSelect"><option value="ar">العربية</option><option value="en">English (واجهة جزئية)</option></select><button class="primary-btn full-width" id="saveProfileBtn">حفظ الإعدادات</button></div>
+        <div class="section-heading"><div><p class="eyebrow">سجلّك</p><h2>آخر الجلسات</h2></div></div><div id="sessionHistory" class="history-list"></div>
+        <button class="secondary-btn full-width" id="exportDataBtn">تصدير بياناتي JSON</button>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="التنقل الرئيسي">
+      <button class="nav-item active" data-nav="home"><span>⌂</span><small>الرئيسية</small></button>
+      <button class="nav-item" data-nav="timer"><span>◷</span><small>المؤقت</small></button>
+      <button class="nav-item" data-nav="challenges"><span>✧</span><small>التحديات</small></button>
+      <button class="nav-item" data-nav="rooms"><span>◉</span><small>الغرف</small></button>
+      <button class="nav-item" data-nav="profile"><span>☻</span><small>حسابي</small></button>
+    </nav>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
